@@ -83,7 +83,7 @@
                 [self.nextViewControllerDelegate conformsToProtocol:@protocol(RZTransitionInteractionControllerDelegate)] ) {
                 if ( self.action & RZTransitionAction_Push ) {
                     if ([self.nextViewControllerDelegate nextViewControllerForInteractor:self] != nil) {
-                        [self.delegate interactionStart:true];
+                        [self.interactionDelegate interactionStart:true];
                         [self.fromViewController.navigationController pushViewController:[self.nextViewControllerDelegate nextViewControllerForInteractor:self] animated:YES];
                     }
                 }
@@ -95,7 +95,7 @@
             else {
                 if (self.action & RZTransitionAction_Pop) {
                     if (self.fromViewController.navigationController.viewControllers.count > 1) {
-                        [self.delegate interactionStart:false];
+                        [self.interactionDelegate interactionStart:false];
                         [self.fromViewController.navigationController popViewControllerAnimated:YES];
                     }
                 }
@@ -108,7 +108,7 @@
         case UIGestureRecognizerStateChanged:
             if (self.isInteractive) {
                 self.shouldCompleteTransition = (percentage >= [self swipeCompletionPercent]);
-                [self.delegate updateProgress:percentage];
+                [self.interactionDelegate updateProgress:percentage];
                 [self updateInteractiveTransition:percentage];
             }
             break;
@@ -117,11 +117,11 @@
         case UIGestureRecognizerStateEnded:
             if (self.isInteractive) {
                 if (!self.shouldCompleteTransition) {
-                    [self.delegate interactionEnd:true];
+                    [self.interactionDelegate interactionEnd:true];
                     [self cancelInteractiveTransition];
                 }
                 else {
-                    [self.delegate interactionEnd:false];
+                    [self.interactionDelegate interactionEnd:false];
                     [self finishInteractiveTransition];
                 }
 

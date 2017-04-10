@@ -56,7 +56,7 @@
  */
 @property (assign, nonatomic) BOOL reverseGestureDirection;
 
-@property (weak, nonatomic) id<RZBaseSwipeInteractionControllerDelegate> delegate;
+@property (weak, nonatomic) id<RZBaseSwipeInteractionControllerDelegate> interactionDelegate;
 
 /**
  *  Subclasses must overide this.
