@@ -32,7 +32,6 @@
 #import "RZTransitionInteractionControllerProtocol.h"
 
 @protocol RZBaseSwipeInteractionControllerDelegate <NSObject>
-@optional
 -(void)interactionStart:(BOOL)push;
 -(void)updateProgress:(CGFloat)percent;
 -(void)interactionEnd:(BOOL)cancel;
