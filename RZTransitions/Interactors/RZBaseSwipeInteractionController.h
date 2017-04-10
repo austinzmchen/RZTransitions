@@ -31,6 +31,13 @@
 
 #import "RZTransitionInteractionControllerProtocol.h"
 
+@protocol RZBaseSwipeInteractionControllerDelegate <NSObject>
+@optional
+-(void)interactionStart:(BOOL)push;
+-(void)updateProgress:(CGFloat)percent;
+-(void)interactionEnd:(BOOL)cancel;
+@end
+
 @interface RZBaseSwipeInteractionController : UIPercentDrivenInteractiveTransition
     <RZTransitionInteractionController, UIGestureRecognizerDelegate>
 
@@ -48,6 +55,8 @@
  *  flag to know if the gesture is happening in the reverse direction.
  */
 @property (assign, nonatomic) BOOL reverseGestureDirection;
+
+@property (weak, nonatomic) id<RZBaseSwipeInteractionControllerDelegate> delegate;
 
 /**
  *  Subclasses must overide this.
