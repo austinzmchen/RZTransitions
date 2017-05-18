@@ -77,9 +77,17 @@
 
 	// Setup the push & pop animations as well as a special animation for pushing a
 	// RZSimpleCollectionViewController
+//    [[RZTransitionsManager shared] setAnimationController:[[RZCardSlideAnimationController alloc] init]
+//                                       fromViewController:[self class]
+//                                                forAction:RZTransitionAction_PushPop];
+    
     [[RZTransitionsManager shared] setAnimationController:[[RZCardSlideAnimationController alloc] init]
                                        fromViewController:[self class]
-                                                forAction:RZTransitionAction_PushPop];
+                                                forAction:RZTransitionAction_Push];
+    [[RZTransitionsManager shared] setAnimationController:[[RZCardReverseSlideAnimationController alloc] init]
+                                       fromViewController:[self class]
+                                                forAction:RZTransitionAction_Pop];
+    
     [[RZTransitionsManager shared] setAnimationController:[[RZZoomPushAnimationController alloc] init]
                                        fromViewController:[self class]
                                          toViewController:[RZSimpleCollectionViewController class]

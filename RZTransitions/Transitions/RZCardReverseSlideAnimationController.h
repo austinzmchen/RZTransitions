@@ -1,8 +1,8 @@
 //
-//  RZTransitionsAnimationControllers.h
+//  RZCardSlideAnimatedTransitioning.h
 //  RZTransitions
 //
-//  Created by Stephen Barnes on 3/13/14.
+//  Created by Nick Donaldson on 11/19/13.
 //  Copyright 2014 Raizlabs and other contributors
 //  http://raizlabs.com/
 //
@@ -26,23 +26,32 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#ifndef RZTransitions_Demo_RZTransitionsAnimationControllers_h
-#define RZTransitions_Demo_RZTransitionsAnimationControllers_h
+#import <Foundation/Foundation.h>
+#import <UIKit/UIColor.h>
+
+#import "RZAnimationControllerProtocol.h"
+
+@interface RZCardReverseSlideAnimationController : NSObject <RZAnimationControllerProtocol>
 
 /**
- *  This is general import helper. Saves importing multiple transitions.
- *  TODO: Why?/ Delete for next larger release.
+ *  The duration of the transition.
+ *
+ *  Default transition time is 0.35 seconds
  */
+@property (assign, nonatomic) NSTimeInterval transitionTime;
 
-#import "RZCardSlideAnimationController.h"
-#import "RZCardReverseSlideAnimationController.h"
+/**
+ *  flag to set if it is going in the horiztonal orientation as opposed to vertical.
+ *
+ *  Defaults to YES
+ */
+@property (assign, nonatomic) BOOL horizontalOrientation;
 
-#import "RZCirclePushAnimationController.h"
-#import "RZSegmentControlMoveFadeAnimationController.h"
-#import "RZShrinkZoomAnimationController.h"
-#import "RZZoomAlphaAnimationController.h"
-#import "RZZoomBlurAnimationController.h"
-#import "RZZoomPushAnimationController.h"
-#import "RZRectZoomAnimationController.h"
+/**
+ *  The background color for the transition's container.
+ *
+ *  Default is [UIColor blackColor]
+ */
+@property (strong, nonatomic) UIColor *containerBackgroundColor;
 
-#endif
+@end
