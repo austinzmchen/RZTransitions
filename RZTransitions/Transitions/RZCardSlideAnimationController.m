@@ -31,6 +31,7 @@
 
 #define kRZSlideTransitionTime 0.35
 #define kRZSlideScaleChangePct 0.33
+#define kRZSlideScaleChangePct2 0.15
 
 @implementation RZCardSlideAnimationController
 
@@ -61,7 +62,7 @@
     if ( self.isPositiveAnimation ) {
         [container insertSubview:toView belowSubview:fromView];
         toView.frame = container.frame;
-        toView.transform = CGAffineTransformMakeScale(1.0 - kRZSlideScaleChangePct, 1.0 - kRZSlideScaleChangePct);
+        toView.transform = CGAffineTransformMakeScale(1.0 - kRZSlideScaleChangePct2, 1.0 - kRZSlideScaleChangePct2);
         toView.alpha = 0.1f;
 
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
@@ -99,7 +100,7 @@
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              toView.transform = CGAffineTransformIdentity;
-                             fromView.transform = CGAffineTransformMakeScale(1.0 - kRZSlideScaleChangePct, 1.0 - kRZSlideScaleChangePct);
+                             fromView.transform = CGAffineTransformMakeScale(1.0 - kRZSlideScaleChangePct2, 1.0 - kRZSlideScaleChangePct2);
                              fromView.alpha = 0.1f;
                          }
                          completion:^(BOOL finished) {
