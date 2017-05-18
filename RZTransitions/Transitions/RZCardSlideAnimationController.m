@@ -30,7 +30,8 @@
 #import "NSObject+RZTransitionsViewHelpers.h"
 
 #define kRZSlideTransitionTime 0.35
-#define kRZSlideScaleChangePct 0.33
+#define kRZSlideScaleChangePct_bak 0.33
+#define kRZSlideScaleChangePct 0.2
 
 @implementation RZCardSlideAnimationController
 
