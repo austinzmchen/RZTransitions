@@ -53,7 +53,7 @@
     [self attachGestureRecognizerToView:self.fromViewController.view];
 }
 
-- (void)attachGestureRecognizerToView:(UIView *)view 
+- (void)attachGestureRecognizerToView:(UIView *)view
 {
     [view addGestureRecognizer:self.gestureRecognizer];
 }
@@ -83,7 +83,7 @@
                 [self.nextViewControllerDelegate conformsToProtocol:@protocol(RZTransitionInteractionControllerDelegate)] ) {
                 if ( self.action & RZTransitionAction_Push ) {
                     if ([self.nextViewControllerDelegate nextViewControllerForInteractor:self] != nil) {
-                        [self.interactionDelegate interactionStart:true];
+                        [self.interactionDelegate interactionStart:YES withUnhandledSwipe:NO];
                         [self.fromViewController.navigationController pushViewController:[self.nextViewControllerDelegate nextViewControllerForInteractor:self] animated:YES];
                     }
                 }
@@ -94,17 +94,18 @@
             }
             else {
                 if (self.action & RZTransitionAction_Pop) {
-                    if (self.fromViewController.navigationController.viewControllers.count > 1) {
-                        [self.interactionDelegate interactionStart:false];
+                    BOOL shouldHandle = self.fromViewController.navigationController.viewControllers.count > 1;
+                    if (shouldHandle) {
                         [self.fromViewController.navigationController popViewControllerAnimated:YES];
                     }
+                    [self.interactionDelegate interactionStart:false withUnhandledSwipe:!shouldHandle];
                 }
                 else if (self.action & RZTransitionAction_Dismiss) {
                     [self.fromViewController dismissViewControllerAnimated:YES completion:nil];
                 }
             }
             break;
-
+            
         case UIGestureRecognizerStateChanged:
             if (self.isInteractive) {
                 self.shouldCompleteTransition = (percentage >= [self swipeCompletionPercent]);
@@ -112,7 +113,7 @@
                 [self updateInteractiveTransition:percentage];
             }
             break;
-
+            
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:
             if (self.isInteractive) {
@@ -124,10 +125,9 @@
                     [self.interactionDelegate interactionEnd:false];
                     [self finishInteractiveTransition];
                 }
-
                 self.isInteractive = NO;
             }
-
+            
         default:
             break;
     }
@@ -171,3 +171,4 @@
 }
 
 @end
+

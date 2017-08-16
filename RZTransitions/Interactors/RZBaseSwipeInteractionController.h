@@ -32,13 +32,13 @@
 #import "RZTransitionInteractionControllerProtocol.h"
 
 @protocol RZBaseSwipeInteractionControllerDelegate <NSObject>
--(void)interactionStart:(BOOL)push;
+-(void)interactionStart:(BOOL)push withUnhandledSwipe:(BOOL)isUnhandled;
 -(void)updateProgress:(CGFloat)percent;
 -(void)interactionEnd:(BOOL)cancel;
 @end
 
 @interface RZBaseSwipeInteractionController : UIPercentDrivenInteractiveTransition
-    <RZTransitionInteractionController, UIGestureRecognizerDelegate>
+<RZTransitionInteractionController, UIGestureRecognizerDelegate>
 
 /**
  *  The ViewController that is doing the presenting.
@@ -95,3 +95,4 @@
 - (CGFloat)translationWithPanGestureRecongizer:(UIPanGestureRecognizer *)panGestureRecognizer;
 
 @end
+
